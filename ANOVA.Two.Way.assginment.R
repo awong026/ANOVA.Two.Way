@@ -65,6 +65,7 @@ qqnorm(dataSugar$Count) #okay
 qqnorm(dataChemical$Count) #okay
 
 
+#Fit model
 anova(aov(Count~as.factor(Location)*as.factor(Trap), twan03))
 #Interaction is not sig and Trap is not sig. But Location is sig. 
 ##since there is a difference in mean count on Location, use multiple comparison, to figure out which one. 
@@ -76,12 +77,11 @@ pairwise.t.test(twan03$Count, twan03$Location)
 model <- aov(Count~as.factor(Location), twan03)
 summary(model) #pvalue below .05
 #We reject H0. There is at least one count mean different per Location
-
 #Since reject H0. Let's do mutliple comparison to check which pair of means are different
 plot(TukeyHSD(model))
 
 #Conclusion
-##Lower-Ground, Middle-Ground, Top_Lower, Top-Middle are the pairs that are different
+##Lower-Ground, Middle-Ground, Top_Lower, Top-Middle are the pairs that are different from looking at the pairs where in Tukey model the lines don't intersect with zero
 
 ############################################################################################
 
